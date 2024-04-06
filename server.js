@@ -1,20 +1,21 @@
 const express = require('express');
-require('dotenv').config()
+const workoutRoutes = require('./routes/workouts.js');
+require('dotenv').config();
 
 //express app
 const app = express();
 
 
 // middleware
+
+app.use(express.json()) // enables passing req object to routes
 app.use((req, res, next) => {
     console.log();
     next();
 });
 
 // routes
-app.get('/', (req, res) => {
-    res.json({mssg : "Welcome to my app"});
-});
+app.use('/api/workouts/',workoutRoutes);
 
 // listen for requests
 app.listen(process.env.PORT, () => {
