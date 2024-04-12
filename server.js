@@ -1,6 +1,7 @@
 const express = require('express');
 const workoutRoutes = require('./routes/workouts.js');
 const mongoose = require('mongoose');
+const cors = require('cors')
 require('dotenv').config();
 
 //express app
@@ -8,11 +9,13 @@ const app = express();
 
 
 // middleware
-app.use(express.json()) // enables passing req object to routes
+app.use(cors());
+app.use(express.json()); // enables passing req object to routes
 app.use((req, res, next) => {
     console.log();
     next();
 });
+
 
 // routes
 app.use('/api/workouts/',workoutRoutes);
